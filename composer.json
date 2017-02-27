@@ -1,0 +1,49 @@
+{
+  "name": "bauhaus/http-response-status",
+  "description": "HTTP response status implementation",
+
+  "type": "library",
+  "license": "MIT",
+
+  "keywords": [
+    "bauhaus",
+    "http response status",
+    "http",
+    "response",
+    "status"
+  ],
+
+  "authors": [
+    {
+      "name": "Felipe Martins",
+      "homepage": "https://blog.fefas.net"
+    }
+  ],
+
+  "support": {
+    "issues": "https://github.com/bauhausphp/http-response-status/issues",
+    "source": "https://github.com/bauhausphp/http-response-status"
+  },
+
+  "require": {
+    "php": ">=7.1"
+  },
+
+  "autoload": {
+    "psr-4": {
+      "Bauhaus\\Http\\Response\\": "src/"
+    }
+  },
+
+  "require-dev": {
+    "phpunit/phpunit": "^6"
+  },
+
+  "autoload-dev": {
+    "psr-4": {
+      "Bauhaus\\Http\\Response\\": [
+        "tests/unit/"
+      ]
+    }
+  }
+}
