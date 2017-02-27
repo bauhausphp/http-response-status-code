@@ -42,7 +42,7 @@ class StatusCode implements StatusCodeInterface
         return StatusCodeClass::SERVER_ERROR;
     }
 
-    public function reasonPhrase(): string
+    public function reasonPhrase(): ?string
     {
         $reasonPhrase = new ReasonPhraseRegistry();
 

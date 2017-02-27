@@ -92,4 +92,16 @@ class StatusCodeTest extends TestCase
             [500, 'Internal Server Error'],
         ];
     }
+
+    /**
+     * @test
+     */
+    public function noReasonPhraseIsChosenIfStatusCodeIsNotRegisteredByIanaAndNoneWasProvided()
+    {
+        $statusCode = new StatusCode(599);
+
+        $reasonPhrase = $statusCode->reasonPhrase();
+
+        $this->assertNull($reasonPhrase);
+    }
 }

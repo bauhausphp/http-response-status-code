@@ -6,6 +6,13 @@ use PHPUnit\Framework\TestCase;
 
 class ReasonPhraseTest extends TestCase
 {
+    private $reasonPhraseRegistry = null;
+
+    protected function setUp()
+    {
+        $this->reasonPhraseRegistry = new ReasonPhraseRegistry();
+    }
+
     /**
      * @test
      * @dataProvider ianaStatusCodesRegistry
@@ -14,9 +21,7 @@ class ReasonPhraseTest extends TestCase
         int $code,
         string $expectedReasonPhrase
     ) {
-        $reasonPhraseRegistry = new ReasonPhraseRegistry();
-
-        $reasonPhrase = $reasonPhraseRegistry->findByCode($code);
+        $reasonPhrase = $this->reasonPhraseRegistry->findByCode($code);
 
         $this->assertEquals($expectedReasonPhrase, $reasonPhrase);
     }
@@ -84,5 +89,15 @@ class ReasonPhraseTest extends TestCase
             [510, 'Not Extended'],
             [511, 'Network Authentication Required'],
         ];
+    }
+
+    /**
+     * @test
+     */
+    public function returnNullIfTryToFindReasonPhraseOfAStatusCodeNotRegisteredByIana()
+    {
+        $reasonPhrase = $this->reasonPhraseRegistry->findByCode(599);
+
+        $this->assertNull($reasonPhrase);
     }
 }

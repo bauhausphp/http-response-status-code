@@ -74,8 +74,8 @@ class ReasonPhraseRegistry
         511 => 'Network Authentication Required',
     ];
 
-    public function findByCode(int $code): string
+    public function findByCode(int $code): ?string
     {
-        return self::IANA_STATUS_CODE_REGISTRY[$code];
+        return self::IANA_STATUS_CODE_REGISTRY[$code] ?? null;
     }
 }
