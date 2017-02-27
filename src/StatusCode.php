@@ -3,6 +3,7 @@
 namespace Bauhaus\Http\Response;
 
 use InvalidArgumentException;
+use Bauhaus\Http\Response\StatusCode\ReasonPhraseRegistry;
 
 class StatusCode implements StatusCodeInterface
 {
@@ -39,6 +40,13 @@ class StatusCode implements StatusCodeInterface
         }
 
         return StatusCodeClass::SERVER_ERROR;
+    }
+
+    public function reasonPhrase(): string
+    {
+        $reasonPhrase = new ReasonPhraseRegistry();
+
+        return $reasonPhrase->findByCode($this->code);
     }
 
     private function isCodeValid(int $code): bool

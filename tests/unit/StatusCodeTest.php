@@ -62,4 +62,34 @@ class StatusCodeTest extends TestCase
             [1000],
         ];
     }
+
+    /**
+     * @test
+     * @dataProvider statusCodesAndReasonPhrasesRegisteredInIana
+     */
+    public function chooseReasonPhraseFromIanaRegistryIfNoneWasProvided(
+        int $code,
+        string $expectedReasonPhrase
+    ) {
+        $statusCode = new StatusCode($code);
+
+        $reasonPhrase = $statusCode->reasonPhrase();
+
+        $this->assertEquals($expectedReasonPhrase, $reasonPhrase);
+    }
+
+    public function statusCodesAndReasonPhrasesRegisteredInIana()
+    {
+        return [
+            [100, 'Continue'],
+            [102, 'Processing'],
+            [200, 'OK'],
+            [201, 'Created'],
+            [301, 'Moved Permanently'],
+            [400, 'Bad Request'],
+            [403, 'Forbidden'],
+            [404, 'Not Found'],
+            [500, 'Internal Server Error'],
+        ];
+    }
 }
