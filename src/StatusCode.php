@@ -2,12 +2,21 @@
 
 namespace Bauhaus\Http\Response;
 
+use InvalidArgumentException;
+
 class StatusCode implements StatusCodeInterface
 {
+    private const CODE_LOWER_LIMIT = 100;
+    private const CODE_UPPER_LIMIT = 599;
+
     private $code = null;
 
     public function __construct(int $code)
     {
+        if (false === $this->isCodeValid($code)) {
+            throw new InvalidArgumentException("The status code '$code' is invalid");
+        }
+
         $this->code = $code;
     }
 
@@ -30,5 +39,10 @@ class StatusCode implements StatusCodeInterface
         }
 
         return StatusCodeClass::SERVER_ERROR;
+    }
+
+    private function isCodeValid(int $code): bool
+    {
+        return $code >= self::CODE_LOWER_LIMIT && $code <= self::CODE_UPPER_LIMIT;
     }
 }

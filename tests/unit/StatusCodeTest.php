@@ -39,4 +39,27 @@ class StatusCodeTest extends TestCase
             [599, StatusCodeClass::SERVER_ERROR],
         ];
     }
+
+    /**
+     * @test
+     * @dataProvider invalidStatusCodes
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessageRegExp /The status code '-?\d+' is invalid/
+     */
+    public function invalidArgumentExceptionOccursIfInvalidCodeIsProvided($invalidCode)
+    {
+        new StatusCode($invalidCode);
+    }
+
+    public function invalidStatusCodes()
+    {
+        return [
+            [-10],
+            [0],
+            [1],
+            [99],
+            [601],
+            [1000],
+        ];
+    }
 }
