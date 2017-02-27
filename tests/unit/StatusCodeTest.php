@@ -100,8 +100,27 @@ class StatusCodeTest extends TestCase
     {
         $statusCode = new StatusCode(599);
 
-        $reasonPhrase = $statusCode->reasonPhrase();
+        $this->assertNull($statusCode->reasonPhrase());
+    }
 
-        $this->assertNull($reasonPhrase);
+    /**
+     * @test
+     * @dataProvider statusCodesAndCustomReasonPhrases
+     */
+    public function allowReasonPhraseCustomizationByProvidingOneOnConstructor(
+        int $code,
+        string $customReasonPhrase
+    ) {
+        $statusCode = new StatusCode($code, $customReasonPhrase);
+
+        $this->assertEquals($customReasonPhrase, $statusCode->reasonPhrase());
+    }
+
+    public function statusCodesAndCustomReasonPhrases()
+    {
+        return [
+            [200, 'A custom Reason Phrase'],
+            [599, 'Another custom Reason Phrase'],
+        ];
     }
 }

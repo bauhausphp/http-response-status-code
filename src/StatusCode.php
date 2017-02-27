@@ -11,14 +11,22 @@ class StatusCode implements StatusCodeInterface
     private const CODE_UPPER_LIMIT = 599;
 
     private $code = null;
+    private $reasonPhrase = null;
 
-    public function __construct(int $code)
+    public function __construct(int $code, string $reasonPhrase = '')
     {
         if (false === $this->isCodeValid($code)) {
             throw new InvalidArgumentException("The status code '$code' is invalid");
         }
 
+        if ('' === $reasonPhrase) {
+            $reasonPhraseRegistry = new ReasonPhraseRegistry();
+
+            $reasonPhrase = $reasonPhraseRegistry->findByCode($code);
+        }
+
         $this->code = $code;
+        $this->reasonPhrase = $reasonPhrase;
     }
 
     public function class(): string
@@ -44,9 +52,7 @@ class StatusCode implements StatusCodeInterface
 
     public function reasonPhrase(): ?string
     {
-        $reasonPhrase = new ReasonPhraseRegistry();
-
-        return $reasonPhrase->findByCode($this->code);
+        return $this->reasonPhrase;
     }
 
     private function isCodeValid(int $code): bool
