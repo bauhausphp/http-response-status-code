@@ -21,8 +21,8 @@
   ],
 
   "support": {
-    "issues": "https://github.com/bauhausphp/http-response-status/issues",
-    "source": "https://github.com/bauhausphp/http-response-status"
+    "issues": "https://github.com/bauhausphp/http-response-status-code/issues",
+    "source": "https://github.com/bauhausphp/http-response-status-code"
   },
 
   "require": {
