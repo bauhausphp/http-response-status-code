@@ -2,33 +2,52 @@
 
 namespace Bauhaus\Http\Response;
 
+use InvalidArgumentException;
+use Bauhaus\Http\Response\StatusCodeRegistry as Registry;
+
 class StatusCode implements StatusCodeInterface
 {
-    private $code = null;
+    private const CODE_LOWER_LIMIT = 100;
+    private const CODE_UPPER_LIMIT = 599;
 
-    public function __construct(int $code)
+    private $code = null;
+    private $reasonPhrase = null;
+
+    public function __construct(int $code, string $reasonPhrase = '')
     {
+        if (false === $this->isCodeValid($code)) {
+            throw new InvalidArgumentException("The status code '$code' is invalid");
+        }
+
+        if ('' === $reasonPhrase) {
+            $registry = new Registry();
+
+            $reasonPhrase = $registry->findReasonPhrase($code);
+        }
+
         $this->code = $code;
+        $this->reasonPhrase = $reasonPhrase;
+    }
+
+    public function code(): int
+    {
+        return $this->code;
+    }
+
+    public function reasonPhrase(): ?string
+    {
+        return $this->reasonPhrase;
     }
 
     public function class(): string
     {
-        if ($this->code < 200) {
-            return 'Informational';
-        }
+        $firstDigit = $this->code / 100;
 
-        if ($this->code < 300) {
-            return 'Successful';
-        }
+        return StatusCodeClass::CLASSES[$firstDigit];
+    }
 
-        if ($this->code < 400) {
-            return 'Redirection';
-        }
-
-        if ($this->code < 500) {
-            return 'Client Error';
-        }
-
-        return 'Server Error';
+    private function isCodeValid(int $code): bool
+    {
+        return $code >= self::CODE_LOWER_LIMIT && $code <= self::CODE_UPPER_LIMIT;
     }
 }
