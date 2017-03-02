@@ -1,6 +1,6 @@
 {
   "name": "bauhaus/http-response-status-code",
-  "description": "HTTP response status implementation",
+  "description": "HTTP response status code",
 
   "type": "library",
   "license": "MIT",
