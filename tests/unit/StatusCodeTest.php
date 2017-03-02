@@ -8,6 +8,25 @@ class StatusCodeTest extends TestCase
 {
     /**
      * @test
+     * @dataProvider sampleCodes
+     */
+    public function storeProvidedCodeAsInteger($code, int $expectedCode)
+    {
+        $statusCode = new StatusCode($code);
+
+        $this->assertSame($expectedCode, $statusCode->code());
+    }
+
+    public function sampleCodes()
+    {
+        return [
+            [404, 404],
+            ['200', 200],
+        ];
+    }
+
+    /**
+     * @test
      * @dataProvider codesAndClasses
      */
     public function classifyItselfAccordingToItsCode($code, $expectedClass)

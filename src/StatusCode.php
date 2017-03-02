@@ -29,6 +29,11 @@ class StatusCode implements StatusCodeInterface
         $this->reasonPhrase = $reasonPhrase;
     }
 
+    public function code(): int
+    {
+        return $this->code;
+    }
+
     public function class(): string
     {
         $firstDigit = $this->code / 100;
