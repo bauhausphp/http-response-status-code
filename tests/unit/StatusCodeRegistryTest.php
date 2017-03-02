@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class StatusCodeRegistryTest extends TestCase
 {
-    private $reasonPhraseRegistry = null;
+    private $statusCodeRegistry = null;
 
     protected function setUp()
     {
