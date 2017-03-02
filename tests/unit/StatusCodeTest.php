@@ -27,6 +27,29 @@ class StatusCodeTest extends TestCase
 
     /**
      * @test
+     * @dataProvider invalidStatusCodes
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessageRegExp /The status code '-?\d+' is invalid/
+     */
+    public function invalidArgumentExceptionOccursIfInvalidCodeIsProvided($invalidCode)
+    {
+        new StatusCode($invalidCode);
+    }
+
+    public function invalidStatusCodes()
+    {
+        return [
+            [-10],
+            [0],
+            [1],
+            [99],
+            [601],
+            [1000],
+        ];
+    }
+
+    /**
+     * @test
      * @dataProvider codesAndClasses
      */
     public function classifyItselfAccordingToItsCode($code, $expectedClass)
@@ -56,29 +79,6 @@ class StatusCodeTest extends TestCase
             [500, StatusCodeClass::SERVER_ERROR],
             [512, StatusCodeClass::SERVER_ERROR],
             [599, StatusCodeClass::SERVER_ERROR],
-        ];
-    }
-
-    /**
-     * @test
-     * @dataProvider invalidStatusCodes
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp /The status code '-?\d+' is invalid/
-     */
-    public function invalidArgumentExceptionOccursIfInvalidCodeIsProvided($invalidCode)
-    {
-        new StatusCode($invalidCode);
-    }
-
-    public function invalidStatusCodes()
-    {
-        return [
-            [-10],
-            [0],
-            [1],
-            [99],
-            [601],
-            [1000],
         ];
     }
 

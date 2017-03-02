@@ -34,16 +34,16 @@ class StatusCode implements StatusCodeInterface
         return $this->code;
     }
 
+    public function reasonPhrase(): ?string
+    {
+        return $this->reasonPhrase;
+    }
+
     public function class(): string
     {
         $firstDigit = $this->code / 100;
 
         return StatusCodeClass::CLASSES[$firstDigit];
-    }
-
-    public function reasonPhrase(): ?string
-    {
-        return $this->reasonPhrase;
     }
 
     private function isCodeValid(int $code): bool
