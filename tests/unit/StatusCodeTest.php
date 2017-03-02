@@ -52,7 +52,7 @@ class StatusCodeTest extends TestCase
      * @test
      * @dataProvider codesAndClasses
      */
-    public function classifyItselfAccordingToItsCode($code, $expectedClass)
+    public function classifyItselfAccordingToRfc7231($code, $expectedClass)
     {
         $statusCode = new StatusCode($code);
 
@@ -115,7 +115,7 @@ class StatusCodeTest extends TestCase
     /**
      * @test
      */
-    public function noReasonPhraseIsChosenIfStatusCodeIsNotRegisteredByIanaAndNoneWasProvided()
+    public function noReasonPhraseIsChosenIfNoneWasProvidedAndItIsNotIanaRegistered()
     {
         $statusCode = new StatusCode(599);
 
@@ -126,7 +126,7 @@ class StatusCodeTest extends TestCase
      * @test
      * @dataProvider statusCodesAndCustomReasonPhrases
      */
-    public function allowReasonPhraseCustomizationByProvidingOneOnConstructor(
+    public function allowReasonPhraseCustomizationByProvidingItOnConstructor(
         int $code,
         string $customReasonPhrase
     ) {
