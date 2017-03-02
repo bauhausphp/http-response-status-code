@@ -1,5 +1,5 @@
 {
-  "name": "bauhaus/http-response-status",
+  "name": "bauhaus/http-response-status-code",
   "description": "HTTP response status implementation",
 
   "type": "library",
