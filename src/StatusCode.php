@@ -3,7 +3,7 @@
 namespace Bauhaus\Http\Response;
 
 use InvalidArgumentException;
-use Bauhaus\Http\Response\StatusCode\ReasonPhraseRegistry;
+use Bauhaus\Http\Response\StatusCodeRegistry as Registry;
 
 class StatusCode implements StatusCodeInterface
 {
@@ -20,9 +20,9 @@ class StatusCode implements StatusCodeInterface
         }
 
         if ('' === $reasonPhrase) {
-            $reasonPhraseRegistry = new ReasonPhraseRegistry();
+            $registry = new Registry();
 
-            $reasonPhrase = $reasonPhraseRegistry->findByCode($code);
+            $reasonPhrase = $registry->findReasonPhrase($code);
         }
 
         $this->code = $code;

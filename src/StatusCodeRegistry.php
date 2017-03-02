@@ -1,6 +1,6 @@
 <?php
 
-namespace Bauhaus\Http\Response\StatusCode;
+namespace Bauhaus\Http\Response;
 
 /**
  * According to the section 6.1 and 8.2 of RFC 7231, the mantainer of the status
@@ -10,7 +10,7 @@ namespace Bauhaus\Http\Response\StatusCode;
  * @ref https://tools.ietf.org/html/rfc7231#section-8.2
  * @ref http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
  */
-class ReasonPhraseRegistry
+class StatusCodeRegistry
 {
     private const IANA_STATUS_CODE_REGISTRY = [
         100 => 'Continue',
@@ -74,7 +74,7 @@ class ReasonPhraseRegistry
         511 => 'Network Authentication Required',
     ];
 
-    public function findByCode(int $code): ?string
+    public function findReasonPhrase(int $code): ?string
     {
         return self::IANA_STATUS_CODE_REGISTRY[$code] ?? null;
     }

@@ -1,16 +1,16 @@
 <?php
 
-namespace Bauhaus\Http\Response\StatusCode;
+namespace Bauhaus\Http\Response;
 
 use PHPUnit\Framework\TestCase;
 
-class ReasonPhraseTest extends TestCase
+class StatusCodeRegistryTest extends TestCase
 {
     private $reasonPhraseRegistry = null;
 
     protected function setUp()
     {
-        $this->reasonPhraseRegistry = new ReasonPhraseRegistry();
+        $this->statusCodeRegistry = new StatusCodeRegistry();
     }
 
     /**
@@ -21,7 +21,7 @@ class ReasonPhraseTest extends TestCase
         int $code,
         string $expectedReasonPhrase
     ) {
-        $reasonPhrase = $this->reasonPhraseRegistry->findByCode($code);
+        $reasonPhrase = $this->statusCodeRegistry->findReasonPhrase($code);
 
         $this->assertEquals($expectedReasonPhrase, $reasonPhrase);
     }
@@ -96,7 +96,7 @@ class ReasonPhraseTest extends TestCase
      */
     public function returnNullIfTryToFindReasonPhraseOfAStatusCodeNotRegisteredByIana()
     {
-        $reasonPhrase = $this->reasonPhraseRegistry->findByCode(599);
+        $reasonPhrase = $this->statusCodeRegistry->findReasonPhrase(599);
 
         $this->assertNull($reasonPhrase);
     }
