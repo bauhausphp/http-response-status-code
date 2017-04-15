@@ -36,7 +36,8 @@
   },
 
   "require-dev": {
-    "phpunit/phpunit": "^6"
+    "phpunit/phpunit": "^6",
+    "squizlabs/php_codesniffer": "^2.8"
   },
 
   "autoload-dev": {
