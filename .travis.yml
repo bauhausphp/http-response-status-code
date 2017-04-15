@@ -9,7 +9,7 @@ install:
 
 script:
    - composer cs-tests
-   - composer unit-tests
+   - composer unit-tests -- --coverage-clover build/logs/clover.xml
 
 after_success:
    - composer require --dev satooshi/php-coveralls:1.*
