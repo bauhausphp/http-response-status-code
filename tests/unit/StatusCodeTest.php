@@ -124,22 +124,13 @@ class StatusCodeTest extends TestCase
 
     /**
      * @test
-     * @dataProvider statusCodesAndCustomReasonPhrases
      */
-    public function allowReasonPhraseCustomizationByProvidingItOnConstructor(
-        int $code,
-        string $customReasonPhrase
-    ) {
-        $statusCode = new StatusCode($code, $customReasonPhrase);
+    public function allowReasonPhraseCustomizationByProvidingItOnConstructor()
+    {
+        $customReasonPhrase = 'My custom Reason Phrase';
+
+        $statusCode = new StatusCode(200, $customReasonPhrase);
 
         $this->assertEquals($customReasonPhrase, $statusCode->reasonPhrase());
-    }
-
-    public function statusCodesAndCustomReasonPhrases()
-    {
-        return [
-            [200, 'A custom Reason Phrase'],
-            [599, 'Another custom Reason Phrase'],
-        ];
     }
 }
