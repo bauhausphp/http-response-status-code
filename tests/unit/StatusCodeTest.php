@@ -8,7 +8,7 @@ class StatusCodeTest extends TestCase
 {
     /**
      * @test
-     * @dataProvider sampleCodes
+     * @dataProvider codesAndTheyConvertedToInteger
      */
     public function storeProvidedCodeAsInteger($code, int $expectedCode)
     {
@@ -17,7 +17,7 @@ class StatusCodeTest extends TestCase
         $this->assertSame($expectedCode, $statusCode->code());
     }
 
-    public function sampleCodes()
+    public function codesAndTheyConvertedToInteger()
     {
         return [
             [404, 404],
@@ -50,7 +50,7 @@ class StatusCodeTest extends TestCase
 
     /**
      * @test
-     * @dataProvider codesAndClasses
+     * @dataProvider codesAndTheirClasses
      */
     public function classifyItselfAccordingToRfc7231($code, $expectedClass)
     {
@@ -61,7 +61,7 @@ class StatusCodeTest extends TestCase
         $this->assertEquals($expectedClass, $class);
     }
 
-    public function codesAndClasses()
+    public function codesAndTheirClasses()
     {
         return [
             [100, StatusCodeClass::INFORMATIONAL],
@@ -84,7 +84,7 @@ class StatusCodeTest extends TestCase
 
     /**
      * @test
-     * @dataProvider statusCodesAndReasonPhrasesRegisteredInIana
+     * @dataProvider codesAndReasonPhrasesIanaRegistered
      */
     public function chooseReasonPhraseFromIanaRegistryIfNoneWasProvided(
         int $code,
@@ -97,7 +97,7 @@ class StatusCodeTest extends TestCase
         $this->assertEquals($expectedReasonPhrase, $reasonPhrase);
     }
 
-    public function statusCodesAndReasonPhrasesRegisteredInIana()
+    public function codesAndReasonPhrasesIanaRegistered()
     {
         return [
             [100, 'Continue'],
@@ -124,22 +124,13 @@ class StatusCodeTest extends TestCase
 
     /**
      * @test
-     * @dataProvider statusCodesAndCustomReasonPhrases
      */
-    public function allowReasonPhraseCustomizationByProvidingItOnConstructor(
-        int $code,
-        string $customReasonPhrase
-    ) {
-        $statusCode = new StatusCode($code, $customReasonPhrase);
+    public function allowReasonPhraseCustomizationByProvidingItOnConstructor()
+    {
+        $customReasonPhrase = 'My custom Reason Phrase';
+
+        $statusCode = new StatusCode(200, $customReasonPhrase);
 
         $this->assertEquals($customReasonPhrase, $statusCode->reasonPhrase());
-    }
-
-    public function statusCodesAndCustomReasonPhrases()
-    {
-        return [
-            [200, 'A custom Reason Phrase'],
-            [599, 'Another custom Reason Phrase'],
-        ];
     }
 }
