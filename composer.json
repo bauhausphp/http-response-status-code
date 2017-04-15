@@ -25,6 +25,15 @@
     "source": "https://github.com/bauhausphp/http-response-status-code"
   },
 
+  "scripts": {
+    "unit-tests": "vendor/bin/phpunit -c tests/config/phpunit.xml --colors=always",
+    "cs-tests": "vendor/bin/phpcs --standard=tests/config/phpcs.xml --colors -ps",
+    "all-tests": [
+      "@unit-tests",
+      "@cs-tests"
+    ]
+  },
+
   "require": {
     "php": ">=7.1"
   },
