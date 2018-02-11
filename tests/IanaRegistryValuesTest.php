@@ -1,8 +1,9 @@
 <?php
 
-namespace Bauhaus\Http\Response\Status;
+namespace Bauhaus\Http\Response;
 
 use PHPUnit\Framework\TestCase;
+use Bauhaus\Http\Response\Status\IanaRegistry;
 use Bauhaus\Http\Response\Status\Code;
 
 class IanaRegistryValuesTest extends TestCase
