@@ -2,32 +2,25 @@
 
 namespace Bauhaus\Http\Response;
 
-use InvalidArgumentException;
+use Bauhaus\Http\Response\Status\Code;
 use Bauhaus\Http\Response\Status\Classification;
 use Bauhaus\Http\Response\Status\Registry;
 use Bauhaus\Http\Response\Status\IanaRegistry;
 
 class Status
 {
-    private const CODE_LOWER_LIMIT = 100;
-    private const CODE_UPPER_LIMIT = 599;
-
     private $code;
     private $reasonPhrase;
 
     private function __construct(int $code, ?string $reasonPhrase)
     {
-        if ($this->isCodeInvalid($code)) {
-            throw new InvalidArgumentException("The status code '$code' is invalid");
-        }
-
-        $this->code = $code;
+        $this->code = new Code($code);
         $this->reasonPhrase = $reasonPhrase;
     }
 
     public function code(): int
     {
-        return $this->code;
+        return $this->code->value();
     }
 
     public function reasonPhrase(): ?string
@@ -37,12 +30,7 @@ class Status
 
     public function class(): string
     {
-        return new Classification($this);
-    }
-
-    private function isCodeInvalid(int $code): bool
-    {
-        return $code < self::CODE_LOWER_LIMIT || $code > self::CODE_UPPER_LIMIT;
+        return new Classification($this->code);
     }
 
     public static function create(int $code, string $reasonPhrase = ''): self
