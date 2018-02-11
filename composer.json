@@ -1,17 +1,11 @@
 {
-  "name": "bauhaus/http-response-status-code",
-  "description": "HTTP response status code",
+  "name": "bauhaus/http-response-status",
+  "description": "HTTP response status",
 
   "type": "library",
   "license": "MIT",
 
-  "keywords": [
-    "bauhaus",
-    "http response status code",
-    "http",
-    "response",
-    "status code"
-  ],
+  "keywords": ["bauhaus", "http", "response", "response status", "status code"],
 
   "authors": [
     {
@@ -21,8 +15,8 @@
   ],
 
   "support": {
-    "issues": "https://github.com/bauhausphp/http-response-status-code/issues",
-    "source": "https://github.com/bauhausphp/http-response-status-code"
+    "issues": "https://github.com/bauhausphp/http-response-status/issues",
+    "source": "https://github.com/bauhausphp/http-response-status"
   },
 
   "scripts": {
