@@ -4,7 +4,7 @@ namespace Bauhaus\Http\Response\Status;
 
 use PHPUnit\Framework\TestCase;
 
-class IanaRegistryTest extends TestCase
+class IanaRegistryValuesTest extends TestCase
 {
     private $ianaRegistry;
 
@@ -17,13 +17,9 @@ class IanaRegistryTest extends TestCase
      * @test
      * @dataProvider ianaRegistryCodesAndExpectedReasonPhrases
      */
-    public function returnReasonPhraseGivenARegisteredCode(
-        int $code,
-        string $expected
-    ) {
-        $reasonPhrase = $this->ianaRegistry->reasonPhrase($code);
-
-        $this->assertEquals($expected, $reasonPhrase);
+    public function returnReasonPhraseAccordingToGivenCode(int $code, string $expected)
+    {
+        $this->assertEquals($expected, $this->ianaRegistry->reasonPhrase($code));
     }
 
     public function ianaRegistryCodesAndExpectedReasonPhrases()
