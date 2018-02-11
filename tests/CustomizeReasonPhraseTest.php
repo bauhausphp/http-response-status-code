@@ -26,7 +26,7 @@ class CustomizeReasonPhraseTest extends TestCase
     {
         $stubRegistry = $this->createMock(Registry::class);
         $stubRegistry
-            ->method('reasonPhrase')
+            ->method('reasonPhraseFromCode')
             ->willReturn('From Custom Registry');
 
         $status = Status::createWithRegistry(200, $stubRegistry);

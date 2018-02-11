@@ -2,8 +2,6 @@
 
 namespace Bauhaus\Http\Response\Status;
 
-use Bauhaus\Http\Response\Status;
-
 class Classification
 {
     private const CLASSES = [

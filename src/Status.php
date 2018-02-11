@@ -3,18 +3,19 @@
 namespace Bauhaus\Http\Response;
 
 use Bauhaus\Http\Response\Status\Code;
-use Bauhaus\Http\Response\Status\Classification;
+use Bauhaus\Http\Response\Status\ReasonPhrase;
 use Bauhaus\Http\Response\Status\Registry;
 use Bauhaus\Http\Response\Status\IanaRegistry;
+use Bauhaus\Http\Response\Status\Classification;
 
 class Status
 {
     private $code;
     private $reasonPhrase;
 
-    private function __construct(int $code, ?string $reasonPhrase)
+    private function __construct(Code $code, ReasonPhrase $reasonPhrase)
     {
-        $this->code = new Code($code);
+        $this->code = $code;
         $this->reasonPhrase = $reasonPhrase;
     }
 
@@ -25,7 +26,7 @@ class Status
 
     public function reasonPhrase(): ?string
     {
-        return $this->reasonPhrase;
+        return $this->reasonPhrase->value();
     }
 
     public function class(): string
@@ -39,12 +40,13 @@ class Status
             return self::createWithRegistry($code, new IanaRegistry());
         }
 
-        return new self($code, $reasonPhrase);
+        return new self(new Code($code), new ReasonPhrase($reasonPhrase));
     }
 
     public static function createWithRegistry(int $code, Registry $registry): self
     {
-        $reasonPhrase = $registry->reasonPhrase($code);
+        $code = new Code($code);
+        $reasonPhrase = ReasonPhrase::fromRegistry($code, $registry);
 
         return new self($code, $reasonPhrase);
     }

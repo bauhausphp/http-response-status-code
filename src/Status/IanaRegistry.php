@@ -74,8 +74,10 @@ class IanaRegistry implements Registry
         511 => 'Network Authentication Required',
     ];
 
-    public function reasonPhrase(int $code): ?string
+    public function reasonPhraseFromCode(Code $code): ?string
     {
+        $code = $code->value();
+
         return self::REASON_PHRASES[$code] ?? null;
     }
 }
