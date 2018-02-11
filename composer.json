@@ -20,11 +20,11 @@
   },
 
   "scripts": {
-    "unit-tests": "vendor/bin/phpunit -c tests/config/phpunit.xml --colors=always",
-    "cs-tests": "vendor/bin/phpcs --standard=tests/config/phpcs.xml --colors -ps",
-    "all-tests": [
-      "@unit-tests",
-      "@cs-tests"
+    "test:cs": "phpcs -ps --colors",
+    "test:unit": "phpunit -c phpunit.xml --testdox --colors=always",
+    "tests": [
+        "@test:cs",
+        "@test:unit"
     ]
   },
 
