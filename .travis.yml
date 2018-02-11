@@ -1,16 +1,16 @@
 language: php
 
 php:
-   - 7.2
+    - 7.2
 
 install:
-   - composer install
-   - mkdir -p build/logs
+    - composer install
+    - mkdir -p build/logs
 
 script:
-   - composer test:cs
-   - composer test:unit -- --coverage-clover build/logs/clover.xml
+    - composer test:cs
+    - composer test:unit -- --coverage-clover build/logs/clover.xml
 
 after_success:
-   - composer require --dev satooshi/php-coveralls:1.*
-   - vendor/bin/coveralls -v --coverage_clover=build/logs/clover.xml
+    - composer require --dev satooshi/php-coveralls:1.*
+    - vendor/bin/coveralls -v --coverage_clover=build/logs/clover.xml
