@@ -1,10 +1,12 @@
 <?php
 
-namespace Bauhaus\Http\Response;
+namespace Bauhaus\Http\Response\Status;
 
-class StatusCodeClass
+use Bauhaus\Http\Response\Status;
+
+class Classification
 {
-    const CLASSES = [
+    private const CLASSES = [
         1 => 'Informational',
         2 => 'Successful',
         3 => 'Redirection',
@@ -17,4 +19,16 @@ class StatusCodeClass
     const REDIRECTION = self::CLASSES[3];
     const CLIENT_ERROR = self::CLASSES[4];
     const SERVER_ERROR = self::CLASSES[5];
+
+    private $class;
+
+    public function __construct(Status $status)
+    {
+        $this->class = $status->code() / 100;
+    }
+
+    public function __toString(): string
+    {
+        return Classification::CLASSES[$this->class];
+    }
 }
