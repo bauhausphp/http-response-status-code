@@ -34,6 +34,14 @@ class Status
         return new Classification($this->code);
     }
 
+    public function __toString(): string
+    {
+        $code = $this->code();
+        $reasonPhrase = $this->reasonPhrase();
+
+        return $reasonPhrase ? "$code $reasonPhrase" : "$code";
+    }
+
     public static function create(int $code, string $reasonPhrase = ''): self
     {
         if (empty($reasonPhrase)) {
