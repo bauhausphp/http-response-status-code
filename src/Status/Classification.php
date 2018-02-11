@@ -22,9 +22,9 @@ class Classification
 
     private $class;
 
-    public function __construct(Status $status)
+    public function __construct(Code $code)
     {
-        $this->class = $status->code() / 100;
+        $this->class = $code->value() / 100;
     }
 
     public function __toString(): string
